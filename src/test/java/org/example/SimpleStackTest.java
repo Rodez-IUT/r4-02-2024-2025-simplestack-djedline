@@ -57,7 +57,54 @@ class SimpleStackTest {
         Stack stack = new SimpleStack();
 
         // When we "pop" the stack, should throws an EmptyStackException.
-        //assertThrows(EmptyStackException.class, ()->stack.pop(), "EmptyStackException not thrown");
+        assertThrows(EmptyStackException.class, ()->stack.pop(), "EmptyStackException not thrown");
         assertThrows(EmptyStackException.class, stack::pop, "EmptyStackException not thrown");
     }
+
+    @Test
+    // @Disabled Permet de ne pas prendre le test en compte
+    @DisplayName("Test limit when trying to pop an fill stack")
+    public void testPopOnFillStack() throws EmptyStackException {
+        // Given an fill stack
+        Stack stack = new SimpleStack();
+        Item item = new SimpleItem();
+
+        stack.push(item);
+
+        // When we "pop" the stack, should an same item.
+        assertSame( item, stack.pop(),"The pushed item must be on top of the stack");
+    }
+
+    @Test
+    // @Disabled Permet de ne pas prendre le test en compte
+    @DisplayName("Test limit when trying to push after to pop an fill stack")
+    public void testPushAfterPopOnFillStack() throws EmptyStackException {
+        // Given an fill stack
+        Stack stack = new SimpleStack();
+        Item item = new SimpleItem();
+        Item item2 = new SimpleItem();
+        Item beforeItem;
+
+        stack.push(item);
+        beforeItem = stack.peek();
+
+        stack.push(item2);
+        stack.pop();
+
+        // When we "pop" the stack, should an same item.
+        assertSame(beforeItem, stack.peek(),"The pushed item must be on top of the stack");
+    }
+
+    @Test
+    @DisplayName("Test limit when trying to peek an empty stack")
+    public void testPeekOnEmptyStack()  {
+        // Given an empty stack
+        Stack stack = new SimpleStack();
+
+        // When we "peek" the stack, should throws an EmptyStackException.
+        assertThrows(EmptyStackException.class, ()->stack.peek(), "EmptyStackException not thrown");
+        assertThrows(EmptyStackException.class, stack::peek, "EmptyStackException not thrown");
+    }
+
+
 }
