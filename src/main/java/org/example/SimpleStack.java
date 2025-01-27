@@ -17,7 +17,7 @@ public class SimpleStack implements Stack {
      */
     @Override
     public boolean isEmpty() {
-        return stack.isEmpty();
+        return this.stack.isEmpty();
     }
 
     /**
@@ -37,7 +37,6 @@ public class SimpleStack implements Stack {
     @Override
     public void push(Item item) {
         this.stack.add(item);
-
     }
 
     /**
@@ -45,7 +44,7 @@ public class SimpleStack implements Stack {
      */
     @Override
     public Item peek() throws EmptyStackException {
-        return null;
+        return this.stack.get(this.stack.size()-1);
     }
 
     /**
@@ -56,6 +55,12 @@ public class SimpleStack implements Stack {
      */
     @Override
     public Item pop() throws EmptyStackException {
-        return null;
+        Item itemTop;
+        if (this.stack.isEmpty()) {
+            throw new EmptyStackException();
+        }
+        itemTop = this.peek();
+        this.stack.remove(this.stack.size()-1);
+        return itemTop;
     }
 }
