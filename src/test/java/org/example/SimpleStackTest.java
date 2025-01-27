@@ -22,8 +22,8 @@ class SimpleStackTest {
     }
 
     @Test
-    @DisplayName("Test the push of items")
-    public void testPush() throws EmptyStackException {
+    @DisplayName("Test the push one item")
+    public void testPushOneitem() throws EmptyStackException {
 
         // Given an empty stack and an item
         Stack stack = new SimpleStack();
@@ -36,9 +36,19 @@ class SimpleStackTest {
         assertFalse(stack.isEmpty(), "The stack must not be empty");
         assertEquals(1, stack.getSize(),"The stack must constain 1 item");
         assertSame( item, stack.peek(),"The pushed item must be is on top of the stack");
+    }
 
-        // Given a new item to add
+    @Test
+    @DisplayName("Test the push two items")
+    public void testPushTwoItems() throws EmptyStackException {
+
+        // Given an empty stack and two items
+        Stack stack = new SimpleStack();
+        Item item = new SimpleItem();
         Item item2 = new SimpleItem();
+
+        // When the item is pushed in the stack
+        stack.push(item);
 
         // When we add the new item
         stack.push(item2);
